@@ -1,0 +1,53 @@
+color: null
+description: null
+fieldLayouts:
+  dcd39c26-8594-4621-8862-de6ce46cb4ec:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2025-12-05T18:28:12+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 4bb71c03-57ea-4ed3-b40b-45c93426ed61
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 7c362807-dc30-4980-8fef-08aa4bf01c6f
+        userCondition: null
+handle: entryLevelFour
+hasTitleField: true
+icon: null
+name: 'Entry Level Four'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
