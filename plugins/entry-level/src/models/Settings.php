@@ -1,6 +1,6 @@
 <?php
 
-namespace hyphamedia\entrytypesdefaults\models;
+namespace hyphamedia\entrylevel\models;
 
 use craft\base\Model;
 

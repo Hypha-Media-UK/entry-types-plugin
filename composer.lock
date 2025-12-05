@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6b60cdebd24c27b352184d09319d6124",
+    "content-hash": "3a6177d41efdfbdd31828733f481641c",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1523,12 +1523,12 @@
             "time": "2025-08-23T21:21:41+00:00"
         },
         {
-            "name": "hyphamedia/entry-types-defaults",
+            "name": "hyphamedia/entry-level",
             "version": "1.0.0",
             "dist": {
                 "type": "path",
-                "url": "plugins/entry-types-defaults",
-                "reference": "804ab9d512d02ce85090cc74d79a09a4c3d2ad65"
+                "url": "plugins/entry-level",
+                "reference": "8307bbf9fa14a176247e248c52e19a8edffdf3ad"
             },
             "require": {
                 "craftcms/cms": "^5.0.0",
@@ -1536,14 +1536,14 @@
             },
             "type": "craft-plugin",
             "extra": {
-                "name": "Entry Types Defaults",
-                "handle": "entry-types-defaults",
+                "name": "Entry Level",
+                "handle": "entry-level",
                 "hasCpSettings": true,
-                "class": "hyphamedia\\entrytypesdefaults\\Plugin"
+                "class": "hyphamedia\\entrylevel\\Plugin"
             },
             "autoload": {
                 "psr-4": {
-                    "hyphamedia\\entrytypesdefaults\\": "src/"
+                    "hyphamedia\\entrylevel\\": "src/"
                 }
             },
             "license": [
@@ -1555,7 +1555,7 @@
                     "homepage": "https://hyphamedia.com"
                 }
             ],
-            "description": "Automatically set default parent entries based on Entry Type hierarchy configuration",
+            "description": "Auto-parent entries in Structure sections based on Entry Type",
             "keywords": [
                 "cms",
                 "craft",
@@ -8509,7 +8509,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "hyphamedia/entry-types-defaults": 20
+        "hyphamedia/entry-level": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

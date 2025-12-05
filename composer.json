@@ -4,12 +4,12 @@
   "repositories": [
     {
       "type": "path",
-      "url": "plugins/entry-types-defaults"
+      "url": "plugins/entry-level"
     }
   ],
   "require": {
     "craftcms/cms": "^5.0.0",
-    "hyphamedia/entry-types-defaults": "@dev",
+    "hyphamedia/entry-level": "@dev",
     "vlucas/phpdotenv": "^5.4.0"
   },
   "require-dev": {

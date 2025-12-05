@@ -1,6 +1,6 @@
 <?php
 
-namespace hyphamedia\entrytypesdefaults;
+namespace hyphamedia\entrylevel;
 
 use Craft;
 use craft\base\Model;
@@ -8,7 +8,7 @@ use craft\base\Plugin as BasePlugin;
 use craft\elements\Entry;
 use craft\events\ModelEvent;
 use craft\models\Section;
-use hyphamedia\entrytypesdefaults\models\Settings;
+use hyphamedia\entrylevel\models\Settings;
 use yii\base\Event;
 
 /**
@@ -36,8 +36,9 @@ class Plugin extends BasePlugin
         $entry = $event->sender;
         $entryKey = "{$entry->id}-{$entry->siteId}";
 
-        // Early exits: already processed, draft/revision, or has parent
+        // Early exits: already processed, not first save, draft/revision, or has parent
         if (isset($this->processedEntries[$entryKey]) ||
+            !$entry->firstSave ||
             $entry->getIsDraft() ||
             $entry->getIsRevision() ||
             ($entry->level ?? 1) > 1) {
@@ -105,7 +106,7 @@ class Plugin extends BasePlugin
             fn($s) => $s->type === 'structure'
         );
 
-        return Craft::$app->getView()->renderTemplate('entry-types-defaults/settings', [
+        return Craft::$app->getView()->renderTemplate('entry-level/settings', [
             'settings' => $this->getSettings(),
             'sections' => $sections,
         ]);

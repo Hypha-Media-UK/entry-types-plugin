@@ -1,6 +1,6 @@
 {
-  "name": "hyphamedia/entry-types-defaults",
-  "description": "Automatically set default parent entries based on Entry Type hierarchy configuration",
+  "name": "hyphamedia/entry-level",
+  "description": "Auto-parent entries in Structure sections based on Entry Type",
   "type": "craft-plugin",
   "version": "1.0.0",
   "keywords": [
@@ -25,14 +25,14 @@
   },
   "autoload": {
     "psr-4": {
-      "hyphamedia\\entrytypesdefaults\\": "src/"
+      "hyphamedia\\entrylevel\\": "src/"
     }
   },
   "extra": {
-    "name": "Entry Types Defaults",
-    "handle": "entry-types-defaults",
+    "name": "Entry Level",
+    "handle": "entry-level",
     "hasCpSettings": true,
-    "class": "hyphamedia\\entrytypesdefaults\\Plugin"
+    "class": "hyphamedia\\entrylevel\\Plugin"
   }
 }
 

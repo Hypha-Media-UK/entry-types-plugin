@@ -1,34 +1,31 @@
-# Entry Types Defaults for Craft CMS 5
+# Entry Level for Craft CMS 5
 
-Automatically parent entries based on Entry Type hierarchy configuration. This plugin solves the common UX problem where entries in Structure sections default to Level 1 when they should be children of a landing page.
+Auto-parent entries in Structure sections based on Entry Type. Solves the UX problem where entries default to Level 1 when they should be children of a landing page.
 
 ## Requirements
 
-- Craft CMS 5.0.0 or later
-- PHP 8.2 or later
+- Craft CMS 5.0.0+
+- PHP 8.2+
 
 ## Installation
 
-### Via Composer (recommended for production)
+### Via Composer
 
 ```bash
-composer require hyphamedia/entry-types-defaults
-php craft plugin/install entry-types-defaults
+composer require hyphamedia/entry-level
+php craft plugin/install entry-level
 ```
 
-### Local Development (path repository)
+### Local Development
 
-1. Place the plugin in `plugins/entry-types-defaults/`
+1. Place the plugin in `plugins/entry-level/`
 
 2. Add to your project's `composer.json`:
 
 ```json
 {
   "repositories": [
-    {
-      "type": "path",
-      "url": "plugins/entry-types-defaults"
-    }
+    {"type": "path", "url": "plugins/entry-level"}
   ]
 }
 ```
@@ -36,13 +33,13 @@ php craft plugin/install entry-types-defaults
 3. Install:
 
 ```bash
-composer require hyphamedia/entry-types-defaults:@dev
-php craft plugin/install entry-types-defaults
+composer require hyphamedia/entry-level:@dev
+php craft plugin/install entry-level
 ```
 
 ## Configuration
 
-1. Go to **Settings → Plugins → Entry Types Defaults**
+1. Go to **Settings → Plugins → Entry Level**
 2. For each Structure section, configure parent-child relationships between Entry Types
 3. Choose a parent selection strategy:
    - **Most Recently Updated** - Uses the most recently updated entry of the parent type
@@ -105,7 +102,7 @@ Lets you pick an exact entry as the parent. Useful when you have multiple landin
 ### Entry not being auto-parented
 
 1. Check that the parent Entry Type has at least one entry created
-2. Verify the configuration in Settings → Plugins → Entry Types Defaults
+2. Verify the configuration in Settings → Plugins → Entry Level
 3. Ensure you're creating a new entry (editing existing entries won't trigger auto-parenting)
 
 ### Wrong parent being selected
