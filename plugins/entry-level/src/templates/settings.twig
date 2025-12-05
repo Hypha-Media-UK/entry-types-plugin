@@ -4,83 +4,108 @@
     <p class="light">No Structure sections found. This plugin only works with Structure sections.</p>
 {% else %}
     <p class="light" style="margin-bottom: 24px;">
-        Configure parent-child relationships between Entry Types. New entries will automatically nest under the configured parent type.
+        Configure parent-child relationships between Entry Types. Drag rows to reorder. New entries will automatically nest under the configured parent type.
     </p>
-
-    <div class="pane" style="margin-bottom: 24px; background: #f3f7fc; border: 1px solid #d1e3f6;">
-        <p style="margin: 0;"><strong>💡 Multi-level hierarchies:</strong> Chain Entry Types (e.g., Article → Category → Landing) for deeper structures.</p>
-    </div>
 
     {% for section in sections %}
         {% set entryTypes = section.getEntryTypes() %}
-        {% set typeHierarchy = (settings.sectionConfig[section.uid] ?? {}).typeHierarchy ?? {} %}
+        {% set sectionConfig = settings.sectionConfig[section.uid] ?? {} %}
+        {% set typeHierarchy = sectionConfig.typeHierarchy ?? {} %}
+        {% set typeOrder = sectionConfig.typeOrder ?? [] %}
 
-        <div class="field" style="margin-bottom: 32px;">
+        {# Sort entry types by saved order, with unsorted types at end #}
+        {% set orderedTypes = [] %}
+        {% for uid in typeOrder %}
+            {% set matchingType = entryTypes|filter(t => t.uid == uid)|first %}
+            {% if matchingType %}
+                {% set orderedTypes = orderedTypes|merge([matchingType]) %}
+            {% endif %}
+        {% endfor %}
+        {% for type in entryTypes|filter(t => t.uid not in typeOrder) %}
+            {% set orderedTypes = orderedTypes|merge([type]) %}
+        {% endfor %}
+
+        <div class="field section-config" data-section-uid="{{ section.uid }}" style="margin-bottom: 32px;">
             <h2>{{ section.name }}</h2>
-            <p class="light">{{ entryTypes|length }} entry type(s)</p>
+            <p class="light">{{ entryTypes|length }} entry type(s) — drag to reorder</p>
 
             {% if entryTypes|length < 2 %}
                 <p class="light">Needs at least 2 entry types to configure hierarchy.</p>
             {% else %}
-                <table class="data fullwidth">
-                    <thead>
-                        <tr>
-                            <th>Entry Type</th>
-                            <th>Parent Type</th>
-                            <th>Selection Strategy</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for type in entryTypes %}
-                            {% set config = typeHierarchy[type.uid] ?? {} %}
-                            {% set prefix = "sectionConfig[#{section.uid}][typeHierarchy][#{type.uid}]" %}
-                            {% set strategy = config.parentSelectionStrategy ?? 'mostRecent' %}
-                            {% set parentUid = config.parentTypeUid ?? '' %}
+                <div style="display: flex; gap: 24px;">
+                    <div style="flex: 2;">
+                        <table class="data fullwidth sortable-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 30px;"></th>
+                                    <th>Entry Type</th>
+                                    <th>Parent Type</th>
+                                    <th>Strategy</th>
+                                </tr>
+                            </thead>
+                            <tbody class="sortable-body">
+                                {% for type in orderedTypes %}
+                                    {% set config = typeHierarchy[type.uid] ?? {} %}
+                                    {% set prefix = "sectionConfig[#{section.uid}][typeHierarchy][#{type.uid}]" %}
+                                    {% set strategy = config.parentSelectionStrategy ?? 'mostRecent' %}
+                                    {% set parentUid = config.parentTypeUid ?? '' %}
 
-                            <tr>
-                                <td style="width: 25%; vertical-align: top; padding-top: 12px;">
-                                    <strong>{{ type.name }}</strong>
-                                </td>
-                                <td style="width: 30%; vertical-align: top;">
-                                    {{ forms.selectField({
-                                        name: "#{prefix}[parentTypeUid]",
-                                        options: [{label: '— None —', value: ''}]|merge(
-                                            entryTypes|filter(t => t.uid != type.uid)|map(t => {label: t.name, value: t.uid})
-                                        ),
-                                        value: parentUid,
-                                        small: true,
-                                        class: 'parent-select'
-                                    }) }}
-                                </td>
-                                <td style="width: 45%; vertical-align: top;">
-                                    <div class="strategy-wrap" {{ not parentUid ? 'hidden' }}>
-                                        {{ forms.radioGroupField({
-                                            name: "#{prefix}[parentSelectionStrategy]",
-                                            options: [
-                                                {label: 'Most Recent', value: 'mostRecent'},
-                                                {label: 'First Created', value: 'firstCreated'},
-                                                {label: 'Specific Entry', value: 'specific'}
-                                            ],
-                                            value: strategy,
-                                            small: true,
-                                            class: 'strategy-radio'
-                                        }) }}
-                                        <div class="specific-wrap" style="margin-top: 8px;" {{ strategy != 'specific' ? 'hidden' }}>
-                                            {{ forms.elementSelectField({
-                                                name: "#{prefix}[specificParentId]",
-                                                elementType: 'craft\\elements\\Entry',
-                                                selectionLabel: 'Choose entry',
-                                                limit: 1,
-                                                criteria: {sectionId: section.id, status: null},
-                                                elements: (config.specificParentId ?? null) ? [craft.entries.id(config.specificParentId).status(null).one()]|filter : []
+                                    <tr class="sortable-row" data-type-uid="{{ type.uid }}" data-type-name="{{ type.name }}">
+                                        <td class="drag-handle" style="cursor: move; text-align: center; color: #8f98a3;">⋮⋮</td>
+                                        <td style="vertical-align: top; padding-top: 12px;">
+                                            <strong>{{ type.name }}</strong>
+                                        </td>
+                                        <td style="vertical-align: top;">
+                                            {{ forms.selectField({
+                                                name: "#{prefix}[parentTypeUid]",
+                                                options: [{label: '— None (Root) —', value: ''}]|merge(
+                                                    entryTypes|filter(t => t.uid != type.uid)|map(t => {label: t.name, value: t.uid})
+                                                ),
+                                                value: parentUid,
+                                                small: true,
+                                                class: 'parent-select'
                                             }) }}
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                                        </td>
+                                        <td style="vertical-align: top;">
+                                            <div class="strategy-wrap" {{ not parentUid ? 'hidden' }}>
+                                                {{ forms.selectField({
+                                                    name: "#{prefix}[parentSelectionStrategy]",
+                                                    options: [
+                                                        {label: 'Most Recent', value: 'mostRecent'},
+                                                        {label: 'First Created', value: 'firstCreated'},
+                                                        {label: 'Specific Entry', value: 'specific'}
+                                                    ],
+                                                    value: strategy,
+                                                    small: true,
+                                                    class: 'strategy-select'
+                                                }) }}
+                                                <div class="specific-wrap" style="margin-top: 8px;" {{ strategy != 'specific' ? 'hidden' }}>
+                                                    {{ forms.elementSelectField({
+                                                        name: "#{prefix}[specificParentId]",
+                                                        elementType: 'craft\\elements\\Entry',
+                                                        selectionLabel: 'Choose',
+                                                        limit: 1,
+                                                        criteria: {sectionId: section.id, status: null},
+                                                        elements: (config.specificParentId ?? null) ? [craft.entries.id(config.specificParentId).status(null).one()]|filter : []
+                                                    }) }}
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <input type="hidden" name="sectionConfig[{{ section.uid }}][typeOrder]" class="type-order-input" value="{{ typeOrder|json_encode }}">
+                    </div>
+
+                    {# Hierarchy Preview #}
+                    <div style="flex: 1;">
+                        <div class="pane hierarchy-preview" style="background: #f8f9fa; padding: 16px;">
+                            <h4 style="margin: 0 0 12px;">Hierarchy Preview</h4>
+                            <div class="preview-tree" style="font-family: monospace; font-size: 13px;"></div>
+                        </div>
+                    </div>
+                </div>
             {% endif %}
         </div>
         {% if not loop.last %}<hr>{% endif %}
@@ -88,11 +113,85 @@
 {% endif %}
 
 {% js %}
+// Drag and drop sorting
+document.querySelectorAll('.sortable-body').forEach(tbody => {
+    let draggedRow = null;
+
+    tbody.querySelectorAll('.sortable-row').forEach(row => {
+        row.draggable = true;
+        row.ondragstart = e => {
+            draggedRow = row;
+            row.style.opacity = '0.5';
+        };
+        row.ondragend = () => {
+            row.style.opacity = '';
+            draggedRow = null;
+            updateTypeOrder(tbody);
+            updatePreview(tbody.closest('.section-config'));
+        };
+        row.ondragover = e => e.preventDefault();
+        row.ondragenter = e => {
+            if (draggedRow && draggedRow !== row) {
+                const rect = row.getBoundingClientRect();
+                const mid = rect.top + rect.height / 2;
+                if (e.clientY < mid) {
+                    tbody.insertBefore(draggedRow, row);
+                } else {
+                    tbody.insertBefore(draggedRow, row.nextSibling);
+                }
+            }
+        };
+    });
+});
+
+function updateTypeOrder(tbody) {
+    const order = [...tbody.querySelectorAll('.sortable-row')].map(r => r.dataset.typeUid);
+    tbody.closest('.section-config').querySelector('.type-order-input').value = JSON.stringify(order);
+}
+
+// Show/hide strategy options
 document.querySelectorAll('.parent-select select').forEach(s => {
-    s.onchange = () => s.closest('tr').querySelector('.strategy-wrap').hidden = !s.value;
+    s.onchange = () => {
+        s.closest('tr').querySelector('.strategy-wrap').hidden = !s.value;
+        updatePreview(s.closest('.section-config'));
+    };
 });
-document.querySelectorAll('.strategy-radio input').forEach(r => {
-    r.onchange = () => r.closest('tr').querySelector('.specific-wrap').hidden = r.value !== 'specific';
+document.querySelectorAll('.strategy-select select').forEach(s => {
+    s.onchange = () => {
+        s.closest('tr').querySelector('.specific-wrap').hidden = s.value !== 'specific';
+    };
 });
+
+// Build hierarchy preview
+function updatePreview(section) {
+    const preview = section.querySelector('.preview-tree');
+    const rows = section.querySelectorAll('.sortable-row');
+    const types = {};
+    const children = {};
+
+    rows.forEach(row => {
+        const uid = row.dataset.typeUid;
+        const name = row.dataset.typeName;
+        const parentUid = row.querySelector('.parent-select select').value;
+        types[uid] = { name, parentUid };
+        if (!children[parentUid]) children[parentUid] = [];
+        children[parentUid].push(uid);
+    });
+
+    function renderTree(parentUid, indent = 0) {
+        let html = '';
+        (children[parentUid] || []).forEach(uid => {
+            const prefix = indent ? '│  '.repeat(indent - 1) + '├─ ' : '';
+            html += `<div style="color: ${indent ? '#666' : '#000'};">${prefix}${types[uid].name}</div>`;
+            html += renderTree(uid, indent + 1);
+        });
+        return html;
+    }
+
+    preview.innerHTML = renderTree('') || '<span class="light">No hierarchy configured</span>';
+}
+
+// Initial preview render
+document.querySelectorAll('.section-config').forEach(updatePreview);
 {% endjs %}
 
