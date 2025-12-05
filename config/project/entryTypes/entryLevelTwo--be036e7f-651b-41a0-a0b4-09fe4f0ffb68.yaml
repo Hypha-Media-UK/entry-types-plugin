@@ -1,0 +1,53 @@
+color: null
+description: null
+fieldLayouts:
+  a76bc7d7-3d3b-45e2-8cb5-ce47dac5d86c:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2025-12-05T17:36:41+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 6e25066b-3dae-46b0-a056-9e45a941c2d0
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 502994e7-78f4-492f-8566-d825c6cfa33d
+        userCondition: null
+handle: entryLevelTwo
+hasTitleField: true
+icon: null
+name: 'Entry Level Two'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

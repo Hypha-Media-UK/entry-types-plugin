@@ -1,0 +1,28 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: b9329609-fe03-4562-a9bd-030469642367 # Entry Level One
+  -
+    uid: be036e7f-651b-41a0-a0b4-09fe4f0ffb68 # Entry Level Two
+  -
+    uid: a3f07f14-f1ac-4845-b74f-ed0333754e26 # Entry Level Three
+handle: entryLevel
+maxAuthors: 1
+name: 'Entry Level'
+previewTargets:
+  -
+    label: 'Primary entry page'
+    refresh: '1'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  fbbb1ae9-e077-4d51-bd76-766c9f985f46: # Entry Level
+    enabledByDefault: true
+    hasUrls: true
+    template: entry-level/_entry.twig
+    uriFormat: 'entry-level/{slug}'
+structure:
+  maxLevels: null
+  uid: 0c805d86-688d-40e4-9198-de091aefd533
+type: structure

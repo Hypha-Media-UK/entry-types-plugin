@@ -1,0 +1,153 @@
+{% import '_includes/forms.twig' as forms %}
+
+{% if sections|length == 0 %}
+    <div class="pane">
+        <p class="light">{{ 'No Structure sections found. This plugin only works with Structure sections.'|t('entry-types-defaults') }}</p>
+    </div>
+{% else %}
+    <p class="light" style="margin-bottom: 24px;">
+        {{ 'Configure parent-child relationships between Entry Types. When a new entry is created, it will automatically be nested under an entry of the configured parent type.'|t('entry-types-defaults') }}
+    </p>
+
+    <div class="pane" style="margin-bottom: 24px; background: #f3f7fc; border: 1px solid #d1e3f6;">
+        <p style="margin: 0;"><strong>💡 Multi-level hierarchies:</strong> You can chain Entry Types to create deeper structures. For example:</p>
+        <ul style="margin: 8px 0 0 0; padding-left: 20px;">
+            <li>Set "Article" → parent: "Category"</li>
+            <li>Set "Category" → parent: "Landing Page"</li>
+            <li>Result: Articles automatically nest under Categories, which nest under Landing Pages</li>
+        </ul>
+    </div>
+
+    {% for section in sections %}
+        {% set entryTypes = section.getEntryTypes() %}
+        {% set sectionConfig = settings.sectionConfig[section.uid] ?? {} %}
+        {% set typeHierarchy = sectionConfig.typeHierarchy ?? {} %}
+
+        <div class="field" style="margin-bottom: 32px;">
+            <div class="heading">
+                <h2>{{ section.name }}</h2>
+                <div class="instructions">
+                    <p>{{ 'Structure section with %count% entry type(s)'|t('entry-types-defaults', {count: entryTypes|length}) }}</p>
+                </div>
+            </div>
+
+            {% if entryTypes|length < 2 %}
+                <div class="pane">
+                    <p class="light">{{ 'This section needs at least 2 entry types to configure a parent-child relationship.'|t('entry-types-defaults') }}</p>
+                </div>
+            {% else %}
+                <table class="data fullwidth">
+                    <thead>
+                        <tr>
+                            <th>{{ 'Entry Type'|t('entry-types-defaults') }}</th>
+                            <th>{{ 'Parent Type'|t('entry-types-defaults') }}</th>
+                            <th>{{ 'Parent Selection'|t('entry-types-defaults') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entryType in entryTypes %}
+                            {% set typeConfig = typeHierarchy[entryType.uid] ?? {} %}
+                            {% set fieldNamePrefix = 'sectionConfig[' ~ section.uid ~ '][typeHierarchy][' ~ entryType.uid ~ ']' %}
+                            {% set currentStrategy = typeConfig.parentSelectionStrategy ?? 'mostRecent' %}
+                            {% set currentParentTypeUid = typeConfig.parentTypeUid ?? '' %}
+
+                            {# Build parent type options #}
+                            {% set parentOptions = [{label: '— None (Root Level) —', value: ''}] %}
+                            {% for otherType in entryTypes %}
+                                {% if otherType.uid != entryType.uid %}
+                                    {% set parentOptions = parentOptions|merge([{
+                                        label: otherType.name,
+                                        value: otherType.uid
+                                    }]) %}
+                                {% endif %}
+                            {% endfor %}
+
+                            <tr data-entry-type-uid="{{ entryType.uid }}" data-section-uid="{{ section.uid }}">
+                                <td style="width: 25%; vertical-align: top; padding-top: 12px;">
+                                    <strong>{{ entryType.name }}</strong>
+                                </td>
+                                <td style="width: 30%; vertical-align: top;">
+                                    {{ forms.selectField({
+                                        name: fieldNamePrefix ~ '[parentTypeUid]',
+                                        id: 'parentType-' ~ section.uid ~ '-' ~ entryType.uid,
+                                        options: parentOptions,
+                                        value: currentParentTypeUid,
+                                        small: true,
+                                        class: 'parent-type-select'
+                                    }) }}
+                                </td>
+                                <td style="width: 45%; vertical-align: top;">
+                                    <div class="strategy-options" {% if not currentParentTypeUid %}style="display: none;"{% endif %}>
+                                        {{ forms.radioGroupField({
+                                            name: fieldNamePrefix ~ '[parentSelectionStrategy]',
+                                            id: 'strategy-' ~ section.uid ~ '-' ~ entryType.uid,
+                                            options: [
+                                                {label: 'Most Recently Updated', value: 'mostRecent'},
+                                                {label: 'First Created', value: 'firstCreated'},
+                                                {label: 'Specific Entry', value: 'specific'}
+                                            ],
+                                            value: currentStrategy,
+                                            small: true,
+                                            class: 'strategy-radio'
+                                        }) }}
+
+                                        {# Specific entry selector - shown when 'specific' strategy is selected #}
+                                        <div class="specific-entry-selector" style="margin-top: 8px; {% if currentStrategy != 'specific' %}display: none;{% endif %}">
+                                            {{ forms.elementSelectField({
+                                                name: fieldNamePrefix ~ '[specificParentId]',
+                                                id: 'specificParent-' ~ section.uid ~ '-' ~ entryType.uid,
+                                                elementType: 'craft\\elements\\Entry',
+                                                selectionLabel: 'Choose parent entry'|t('entry-types-defaults'),
+                                                limit: 1,
+                                                criteria: {
+                                                    sectionId: section.id,
+                                                    status: null
+                                                },
+                                                elements: (typeConfig.specificParentId ?? null) ? [craft.entries.id(typeConfig.specificParentId).status(null).one()]|filter : []
+                                            }) }}
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+
+        {% if not loop.last %}
+            <hr style="margin: 24px 0;">
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{% js %}
+(function() {
+    // Show/hide strategy options based on parent type selection
+    document.querySelectorAll('.parent-type-select select').forEach(function(select) {
+        select.addEventListener('change', function() {
+            var row = this.closest('tr');
+            var strategyOptions = row.querySelector('.strategy-options');
+            if (this.value) {
+                strategyOptions.style.display = '';
+            } else {
+                strategyOptions.style.display = 'none';
+            }
+        });
+    });
+
+    // Show/hide specific entry selector based on strategy selection
+    document.querySelectorAll('.strategy-radio input[type="radio"]').forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            var row = this.closest('tr');
+            var specificSelector = row.querySelector('.specific-entry-selector');
+            if (this.value === 'specific') {
+                specificSelector.style.display = '';
+            } else {
+                specificSelector.style.display = 'none';
+            }
+        });
+    });
+})();
+{% endjs %}
+

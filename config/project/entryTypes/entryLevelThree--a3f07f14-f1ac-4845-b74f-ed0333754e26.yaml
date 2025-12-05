@@ -1,0 +1,53 @@
+color: null
+description: null
+fieldLayouts:
+  8c7a27da-223c-4445-a8b3-10a7aab21f09:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2025-12-05T18:12:56+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 5135c74f-2599-436e-a667-a69175f2eb32
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: fece8bfc-ce5d-4b59-b70a-4d009f14b0c8
+        userCondition: null
+handle: entryLevelThree
+hasTitleField: true
+icon: null
+name: 'Entry Level Three'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
