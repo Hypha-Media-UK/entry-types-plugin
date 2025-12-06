@@ -1,6 +1,6 @@
 <?php
 
-namespace hyphamedia\entrylevel\models;
+namespace martinsmith\entrylevel\models;
 
 use craft\base\Model;
 

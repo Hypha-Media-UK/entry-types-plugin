@@ -1,6 +1,6 @@
 <?php
 
-namespace hyphamedia\entrylevel;
+namespace martinsmith\entrylevel;
 
 use Craft;
 use craft\base\Model;
@@ -8,7 +8,7 @@ use craft\base\Plugin as BasePlugin;
 use craft\elements\Entry;
 use craft\events\ModelEvent;
 use craft\models\Section;
-use hyphamedia\entrylevel\models\Settings;
+use martinsmith\entrylevel\models\Settings;
 use yii\base\Event;
 
 /**

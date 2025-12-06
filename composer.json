@@ -4,12 +4,12 @@
   "repositories": [
     {
       "type": "path",
-      "url": "plugins/entry-level"
+      "url": "plugins/martinsmith/entry-level"
     }
   ],
   "require": {
     "craftcms/cms": "^5.0.0",
-    "hyphamedia/entry-level": "@dev",
+    "martinsmith/entry-level": "@dev",
     "vlucas/phpdotenv": "^5.4.0"
   },
   "require-dev": {

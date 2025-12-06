@@ -1,4 +1,4 @@
-dateModified: 1765021148
+dateModified: 1765023097
 email:
   fromEmail: martin@hypha.media
   fromName: 'Entry Level'
@@ -37,12 +37,6 @@ plugins:
                             -
                               - parentTypeUid
                               - ''
-                            -
-                              - parentSelectionStrategy
-                              - mostRecent
-                            -
-                              - specificParentId
-                              - ''
                       -
                         - be036e7f-651b-41a0-a0b4-09fe4f0ffb68 # Individual Article Page
                         -
@@ -50,12 +44,6 @@ plugins:
                             -
                               - parentTypeUid
                               - b9329609-fe03-4562-a9bd-030469642367 # Section Landing Page
-                            -
-                              - parentSelectionStrategy
-                              - mostRecent
-                            -
-                              - specificParentId
-                              - ''
                       -
                         - a3f07f14-f1ac-4845-b74f-ed0333754e26 # A Level Three Entry
                         -
@@ -63,12 +51,6 @@ plugins:
                             -
                               - parentTypeUid
                               - be036e7f-651b-41a0-a0b4-09fe4f0ffb68 # Individual Article Page
-                            -
-                              - parentSelectionStrategy
-                              - mostRecent
-                            -
-                              - specificParentId
-                              - ''
                 -
                   - typeOrder
                   -
@@ -90,12 +72,6 @@ plugins:
                             -
                               - parentTypeUid
                               - ''
-                            -
-                              - parentSelectionStrategy
-                              - mostRecent
-                            -
-                              - specificParentId
-                              - ''
                       -
                         - c309933f-7fb2-44a5-997a-9f0646fbe7e8 # Individual Article Page
                         -
@@ -103,12 +79,6 @@ plugins:
                             -
                               - parentTypeUid
                               - 5455e65b-99ce-4a1f-9b53-a78c08edd1fa # Section Landing Page
-                            -
-                              - parentSelectionStrategy
-                              - mostRecent
-                            -
-                              - specificParentId
-                              - ''
                 -
                   - typeOrder
                   -

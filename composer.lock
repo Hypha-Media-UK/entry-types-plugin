@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a6177d41efdfbdd31828733f481641c",
+    "content-hash": "4479d602b2284145b776586ddffd6693",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1523,53 +1523,6 @@
             "time": "2025-08-23T21:21:41+00:00"
         },
         {
-            "name": "hyphamedia/entry-level",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "plugins/entry-level",
-                "reference": "8307bbf9fa14a176247e248c52e19a8edffdf3ad"
-            },
-            "require": {
-                "craftcms/cms": "^5.0.0",
-                "php": "^8.2"
-            },
-            "type": "craft-plugin",
-            "extra": {
-                "name": "Entry Level",
-                "handle": "entry-level",
-                "hasCpSettings": true,
-                "class": "hyphamedia\\entrylevel\\Plugin"
-            },
-            "autoload": {
-                "psr-4": {
-                    "hyphamedia\\entrylevel\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Hypha Media",
-                    "homepage": "https://hyphamedia.com"
-                }
-            ],
-            "description": "Auto-parent entries in Structure sections based on Entry Type",
-            "keywords": [
-                "cms",
-                "craft",
-                "craftcms",
-                "entry-types",
-                "hierarchy",
-                "parent",
-                "structure"
-            ],
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
             "name": "illuminate/collections",
             "version": "v10.49.0",
             "source": {
@@ -2009,6 +1962,52 @@
                 }
             ],
             "time": "2025-11-18T12:17:23+00:00"
+        },
+        {
+            "name": "martinsmith/entry-level",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "plugins/martinsmith/entry-level",
+                "reference": "0ee2c2cf44d03b499642985f451e6e095a42f6a2"
+            },
+            "require": {
+                "craftcms/cms": "^5.0.0",
+                "php": "^8.2"
+            },
+            "type": "craft-plugin",
+            "extra": {
+                "name": "Entry Level",
+                "handle": "entry-level",
+                "hasCpSettings": true,
+                "class": "martinsmith\\entrylevel\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "martinsmith\\entrylevel\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Smith"
+                }
+            ],
+            "description": "Auto-parent entries in Structure sections based on Entry Type",
+            "keywords": [
+                "cms",
+                "craft",
+                "craftcms",
+                "entry-types",
+                "hierarchy",
+                "parent",
+                "structure"
+            ],
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "masterminds/html5",
@@ -8207,16 +8206,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.6.2",
+            "version": "v5.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "3a454ca033b9e06b63282ce19562e892747449bb"
+                "reference": "dca41cd15c2ac9d055ad70dbfd011130757d1f82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/3a454ca033b9e06b63282ce19562e892747449bb",
-                "reference": "3a454ca033b9e06b63282ce19562e892747449bb",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/dca41cd15c2ac9d055ad70dbfd011130757d1f82",
+                "reference": "dca41cd15c2ac9d055ad70dbfd011130757d1f82",
                 "shasum": ""
             },
             "require": {
@@ -8259,9 +8258,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.6.2"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.7.0"
             },
-            "time": "2025-10-21T19:32:17+00:00"
+            "time": "2025-12-06T11:56:16+00:00"
         },
         {
             "name": "psy/psysh",
@@ -8509,7 +8508,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "hyphamedia/entry-level": 20
+        "martinsmith/entry-level": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

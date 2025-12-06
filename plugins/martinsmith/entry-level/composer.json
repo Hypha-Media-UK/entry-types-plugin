@@ -1,5 +1,5 @@
 {
-  "name": "hyphamedia/entry-level",
+  "name": "martinsmith/entry-level",
   "description": "Auto-parent entries in Structure sections based on Entry Type",
   "type": "craft-plugin",
   "version": "1.0.0",
@@ -15,8 +15,7 @@
   "license": "MIT",
   "authors": [
     {
-      "name": "Hypha Media",
-      "homepage": "https://hyphamedia.com"
+      "name": "Martin Smith"
     }
   ],
   "require": {
@@ -25,14 +24,14 @@
   },
   "autoload": {
     "psr-4": {
-      "hyphamedia\\entrylevel\\": "src/"
+      "martinsmith\\entrylevel\\": "src/"
     }
   },
   "extra": {
     "name": "Entry Level",
     "handle": "entry-level",
     "hasCpSettings": true,
-    "class": "hyphamedia\\entrylevel\\Plugin"
+    "class": "martinsmith\\entrylevel\\Plugin"
   }
 }
 
