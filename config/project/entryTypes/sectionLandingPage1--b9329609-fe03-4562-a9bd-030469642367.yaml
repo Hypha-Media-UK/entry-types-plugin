@@ -40,10 +40,10 @@ fieldLayouts:
         name: Content
         uid: 3ebddc67-cd24-4431-89e4-17629dafc2d1
         userCondition: null
-handle: entryLevelOne
+handle: sectionLandingPage1
 hasTitleField: true
 icon: null
-name: 'Entry Level One'
+name: 'Section Landing Page'
 showSlugField: true
 showStatusField: true
 slugTranslationKeyFormat: null

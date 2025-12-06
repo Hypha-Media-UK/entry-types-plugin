@@ -2,16 +2,14 @@ defaultPlacement: end
 enableVersioning: true
 entryTypes:
   -
-    uid: be036e7f-651b-41a0-a0b4-09fe4f0ffb68 # Entry Level Two
+    uid: be036e7f-651b-41a0-a0b4-09fe4f0ffb68 # Individual Article Page
   -
-    uid: b9329609-fe03-4562-a9bd-030469642367 # Entry Level One
+    uid: b9329609-fe03-4562-a9bd-030469642367 # Section Landing Page
   -
-    uid: a3f07f14-f1ac-4845-b74f-ed0333754e26 # Entry Level Three
-  -
-    uid: 27da2506-e958-41cf-a066-2be2fa0283d9 # Entry Level Four
-handle: entryLevel
+    uid: a3f07f14-f1ac-4845-b74f-ed0333754e26 # A Level Three Entry
+handle: structureSectionOne
 maxAuthors: 1
-name: 'Entry Level'
+name: 'Structure Section One'
 previewTargets:
   -
     label: 'Primary entry page'

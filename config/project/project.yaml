@@ -1,4 +1,4 @@
-dateModified: 1764960094
+dateModified: 1765021148
 email:
   fromEmail: martin@hypha.media
   fromName: 'Entry Level'
@@ -6,17 +6,114 @@ email:
 meta:
   __names__:
     8b0eb8fa-5a19-4e68-bd18-dcb0c249f224: 'Entry Level' # Entry Level
-    27da2506-e958-41cf-a066-2be2fa0283d9: 'Entry Level Four' # Entry Level Four
-    a3f07f14-f1ac-4845-b74f-ed0333754e26: 'Entry Level Three' # Entry Level Three
-    b3461d75-57e6-4484-8e61-94098383e4fe: 'Entry Level' # Entry Level
-    b9329609-fe03-4562-a9bd-030469642367: 'Entry Level One' # Entry Level One
-    be036e7f-651b-41a0-a0b4-09fe4f0ffb68: 'Entry Level Two' # Entry Level Two
+    5455e65b-99ce-4a1f-9b53-a78c08edd1fa: 'Section Landing Page' # Section Landing Page
+    a3f07f14-f1ac-4845-b74f-ed0333754e26: 'A Level Three Entry' # A Level Three Entry
+    b3461d75-57e6-4484-8e61-94098383e4fe: 'Structure Section One' # Structure Section One
+    b9329609-fe03-4562-a9bd-030469642367: 'Section Landing Page' # Section Landing Page
+    be036e7f-651b-41a0-a0b4-09fe4f0ffb68: 'Individual Article Page' # Individual Article Page
+    c309933f-7fb2-44a5-997a-9f0646fbe7e8: 'Individual Article Page' # Individual Article Page
+    f006d34c-9336-4dda-8070-3d78549608e5: 'Structure Section Two' # Structure Section Two
     fbbb1ae9-e077-4d51-bd76-766c9f985f46: 'Entry Level' # Entry Level
 plugins:
   entry-level:
     edition: standard
     enabled: true
     schemaVersion: 1.0.0
+    settings:
+      sectionConfig:
+        __assoc__:
+          -
+            - b3461d75-57e6-4484-8e61-94098383e4fe # Structure Section One
+            -
+              __assoc__:
+                -
+                  - typeHierarchy
+                  -
+                    __assoc__:
+                      -
+                        - b9329609-fe03-4562-a9bd-030469642367 # Section Landing Page
+                        -
+                          __assoc__:
+                            -
+                              - parentTypeUid
+                              - ''
+                            -
+                              - parentSelectionStrategy
+                              - mostRecent
+                            -
+                              - specificParentId
+                              - ''
+                      -
+                        - be036e7f-651b-41a0-a0b4-09fe4f0ffb68 # Individual Article Page
+                        -
+                          __assoc__:
+                            -
+                              - parentTypeUid
+                              - b9329609-fe03-4562-a9bd-030469642367 # Section Landing Page
+                            -
+                              - parentSelectionStrategy
+                              - mostRecent
+                            -
+                              - specificParentId
+                              - ''
+                      -
+                        - a3f07f14-f1ac-4845-b74f-ed0333754e26 # A Level Three Entry
+                        -
+                          __assoc__:
+                            -
+                              - parentTypeUid
+                              - be036e7f-651b-41a0-a0b4-09fe4f0ffb68 # Individual Article Page
+                            -
+                              - parentSelectionStrategy
+                              - mostRecent
+                            -
+                              - specificParentId
+                              - ''
+                -
+                  - typeOrder
+                  -
+                    - b9329609-fe03-4562-a9bd-030469642367 # Section Landing Page
+                    - be036e7f-651b-41a0-a0b4-09fe4f0ffb68 # Individual Article Page
+                    - a3f07f14-f1ac-4845-b74f-ed0333754e26 # A Level Three Entry
+          -
+            - f006d34c-9336-4dda-8070-3d78549608e5 # Structure Section Two
+            -
+              __assoc__:
+                -
+                  - typeHierarchy
+                  -
+                    __assoc__:
+                      -
+                        - 5455e65b-99ce-4a1f-9b53-a78c08edd1fa # Section Landing Page
+                        -
+                          __assoc__:
+                            -
+                              - parentTypeUid
+                              - ''
+                            -
+                              - parentSelectionStrategy
+                              - mostRecent
+                            -
+                              - specificParentId
+                              - ''
+                      -
+                        - c309933f-7fb2-44a5-997a-9f0646fbe7e8 # Individual Article Page
+                        -
+                          __assoc__:
+                            -
+                              - parentTypeUid
+                              - 5455e65b-99ce-4a1f-9b53-a78c08edd1fa # Section Landing Page
+                            -
+                              - parentSelectionStrategy
+                              - mostRecent
+                            -
+                              - specificParentId
+                              - ''
+                -
+                  - typeOrder
+                  -
+                    - 5455e65b-99ce-4a1f-9b53-a78c08edd1fa # Section Landing Page
+                    - c309933f-7fb2-44a5-997a-9f0646fbe7e8 # Individual Article Page
 system:
   edition: solo
   live: true

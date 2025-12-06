@@ -1,0 +1,26 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: c309933f-7fb2-44a5-997a-9f0646fbe7e8 # Individual Article Page
+  -
+    uid: 5455e65b-99ce-4a1f-9b53-a78c08edd1fa # Section Landing Page
+handle: structureSectionTwo
+maxAuthors: 1
+name: 'Structure Section Two'
+previewTargets:
+  -
+    label: 'Primary entry page'
+    refresh: '1'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  fbbb1ae9-e077-4d51-bd76-766c9f985f46: # Entry Level
+    enabledByDefault: true
+    hasUrls: true
+    template: structure-section-two/_entry.twig
+    uriFormat: 'structure-section-two/{slug}'
+structure:
+  maxLevels: null
+  uid: a26a80d5-089b-4dcf-b154-2fc706992d11
+type: structure

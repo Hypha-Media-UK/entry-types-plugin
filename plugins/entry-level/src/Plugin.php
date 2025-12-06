@@ -74,23 +74,12 @@ class Plugin extends BasePlugin
             return null;
         }
 
-        $strategy = $config['parentSelectionStrategy'] ?? 'mostRecent';
-
-        // Specific entry takes priority
-        if ($strategy === 'specific' && !empty($config['specificParentId'])) {
-            return Entry::find()->id($config['specificParentId'])->status(null)->one();
-        }
-
-        $orderBy = match ($strategy) {
-            'firstCreated' => 'dateCreated ASC',
-            default => 'dateUpdated DESC',
-        };
-
+        // Find most recent entry of the parent type
         return Entry::find()
             ->sectionId($section->id)
             ->typeId($parentType->id)
             ->status(null)
-            ->orderBy($orderBy)
+            ->orderBy('dateCreated DESC')
             ->one();
     }
 

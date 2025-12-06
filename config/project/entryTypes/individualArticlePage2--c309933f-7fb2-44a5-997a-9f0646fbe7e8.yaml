@@ -1,7 +1,7 @@
 color: null
 description: null
 fieldLayouts:
-  8c7a27da-223c-4445-a8b3-10a7aab21f09:
+  336cdee8-f571-4d9a-b648-99b3500ea520:
     cardThumbAlignment: end
     tabs:
       -
@@ -12,7 +12,7 @@ fieldLayouts:
             autocomplete: false
             autocorrect: true
             class: null
-            dateAdded: '2025-12-05T18:12:56+00:00'
+            dateAdded: '2025-12-06T11:32:51+00:00'
             disabled: false
             elementCondition: null
             id: null
@@ -33,17 +33,17 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
-            uid: 5135c74f-2599-436e-a667-a69175f2eb32
+            uid: 79ccf2d5-ace3-4b91-ae03-cf03c5321c01
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: fece8bfc-ce5d-4b59-b70a-4d009f14b0c8
+        uid: 2796b2c0-c5a9-47de-9114-d14759427e1b
         userCondition: null
-handle: entryLevelThree
+handle: individualArticlePage2
 hasTitleField: true
 icon: null
-name: 'Entry Level Three'
+name: 'Individual Article Page'
 showSlugField: true
 showStatusField: true
 slugTranslationKeyFormat: null
